@@ -1,0 +1,97 @@
+.mat-form-field+.mat-form-field {
+    margin-left: 8px;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.example-headers-align .mat-form-field+.mat-form-field {
+    margin-left: 8px;
+}
+
+#cont1 {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.example-card {
+    max-width: 400px;
+}
+
+.example-header-image {
+    background-image: url('http://1.bp.blogspot.com/-e45ugM-ZbGA/Um6WUbwzcmI/AAAAAAAAA9U/NncJdLn-jh4/s1600/admin+page.jpg');
+    background-size: cover;
+}
+
+#addadmin {
+    width: 260px;
+}
+
+#addproducts {
+    width: 260px;
+    margin-left: 150px;
+}
+
+
+/*css for form */
+
+.example-container .mat-form-field+.mat-form-field {
+    margin-left: 8px;
+}
+
+form.normal-form {
+    margin: 10px;
+}
+
+.controles-container {
+    width: 100%;
+    padding: 5px;
+}
+
+.controles-container>* {
+    width: 100%;
+}
+
+.example-button-row {
+    display: table-cell;
+    width: 490px;
+}
+
+
+/**/
+
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+td,
+th {
+    width: 25%;
+}
+
+table {
+    width: 100%;
+}
+
+.example-container {
+    height: 400px;
+    overflow: auto;
+}
+
+.container{
+    background-image: url('https://cdn.wallpapersafari.com/36/54/BMiDUP.jpg');
+    width: 100%;
+}

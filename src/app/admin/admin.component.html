@@ -1,0 +1,304 @@
+<mat-spinner style="margin-top:250px;margin-left: 500px;" *ngIf="isloading">
+</mat-spinner>
+<div class="container" id="mainCont" *ngIf="!isloading">
+    <div class="container" id="cont1">
+        <div>
+            <mat-card class="example-card" align="center">
+                <mat-card-title>
+                    Products
+                </mat-card-title>
+                <mat-card-content>
+                    <img mat-card-xl-image src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWSMpdeNcFt_GBXBREYTndTMeyAqcsfZYsiA&usqp=CAU'>
+                </mat-card-content>
+                <mat-card-footer>
+                    Current Stock: <b style="color:green;">{{currentProductsStock}}</b>
+                </mat-card-footer>
+            </mat-card>
+        </div>
+        <!-- <div>
+            <mat-card class="example-card" align="center">
+                <mat-card-title>
+                    Users
+                </mat-card-title>
+                <mat-card-content>
+                    <img mat-card-xl-image src='https://i.pinimg.com/564x/92/55/0e/92550e6fadb12fad57eebf513b296cf0--blog-search-different-types-of.jpg'>
+                </mat-card-content>
+                <mat-card-footer>
+                    Current users: <b style="color:green;">{{currentUsers}}</b>
+                </mat-card-footer>
+            </mat-card>
+        </div>
+        <div>
+            <mat-card class="example-card" align="center">
+                <mat-card-title>
+                    Admins
+                </mat-card-title>
+                <mat-card-content>
+
+                    <img mat-card-xl-image src='https://content.instructables.com/ORIG/FC3/QMOU/J2GEURC6/FC3QMOUJ2GEURC6.png?auto=webp&frame=1&md=082b0c44c3eef54af16c6a4464bf7d72'>
+                </mat-card-content>
+                <mat-card-footer>
+                    Current Admins: <b style="color:green;">{{currentAdmins}}</b>
+                </mat-card-footer>
+            </mat-card>
+        </div> -->
+    </div>
+    <br>
+    <!-- admin add button -->
+    <div class="container d-flex">
+        <div>
+            <mat-card class="example-card " align="center" id="addadmin">
+                <mat-card-content>
+                    <img mat-card-sm-image src='https://www.kindpng.com/picc/m/111-1114696_user-add-plus-new-man-person-admin-security.png'>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button class="btn btn-primary" mat-raised-button data-toggle="modal" data-target="#exampleModal" matTooltip="Add sub Admins" aria-label="Button that displays a tooltip when focused or hovered over">
+                        Add Admin</button>
+                </mat-card-actions>
+                <mat-card-footer>
+                    <mat-progress-bar mode="query" color="accent"></mat-progress-bar>
+                </mat-card-footer>
+            </mat-card>
+        </div>
+
+        <div>
+            <mat-card class="example-card" id="addproducts" align="center">
+                <mat-card-content>
+                    <img mat-card-sm-image src='https://www.kindpng.com/picc/m/722-7221747_shopping-bag-shop-add-product-new-add-new.png'>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button class="btn btn-warning" mat-raised-button data-toggle="modal" data-target="#exampleModal1" matTooltip="Add new Products" aria-label="Button that displays a tooltip when focused or hovered over">
+                        Add Products
+                    </button>
+                </mat-card-actions>
+                <mat-card-footer>
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                </mat-card-footer>
+            </mat-card>
+        </div>
+    </div>
+    <br>
+
+    <div>
+
+        <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <b>View Products</b>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        click to {{panelOpenState ? 'close the' : 'view'}} products details
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="container text-center">
+                    <table mat-table [dataSource]="dataSource" class=" example-container mat-elevation-z8">
+                        <!-- Column numbers -->
+                        <ng-container matColumnDef="S.no">
+                            <th mat-header-cell *matHeaderCellDef> S.no </th>
+                            <td mat-cell *matCellDef="let element;index as i"> {{i+1}} </td>
+                        </ng-container>
+                        <!--Product id Column -->
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef> Product id </th>
+                            <td mat-cell *matCellDef="let element"> {{element._id}} </td>
+                        </ng-container>
+
+                        <!--Product Name Column -->
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef> Product Name </th>
+                            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                        </ng-container>
+
+                        <!-- Price Column -->
+                        <ng-container matColumnDef="price">
+                            <th mat-header-cell *matHeaderCellDef> Product Price </th>
+                            <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+                        </ng-container>
+
+                        <!-- Quantity Column -->
+                        <ng-container matColumnDef="quantity">
+                            <th mat-header-cell *matHeaderCellDef> Product Quantity </th>
+                            <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+                        </ng-container>
+                        <!-- Image Column -->
+                        <ng-container matColumnDef="imgUrl">
+                            <th mat-header-cell *matHeaderCellDef> Product Image </th>
+                            <td mat-cell *matCellDef="let element"><img [src]=element.imgUrl alt="" height="50" width="50"></td>
+                        </ng-container>
+                        <!-- Actions Column with buttons -->
+                        <ng-container matColumnDef="actions">
+                            <th mat-header-cell *matHeaderCellDef> Actions </th>
+                            <td mat-cell *matCellDef="let element">
+                                <button class="btn btn-warning" data-toggle="modal" data-target="#exampleModal1" mat-raised-button matTooltip="Edit products" (click)="onEdit(element) ">
+                                Edit</button> &nbsp;
+                                <button class="btn btn-danger" mat-raised-button matTooltip="Delete products" (click)="deteteProd(element._id)">
+                                Delete</button>
+                            </td>
+                        </ng-container>
+
+                        <!-- used sticky:true to make the header sticky -->
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <!-- paginator -->
+                    <mat-paginator [pageSizeOptions]="[2,4,6,8,10]" showFirstLastButtons aria-label="Select page of products">
+                    </mat-paginator>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <!-- all users details table -->
+    <br>
+    <div>
+        <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <b>View Users</b>
+                    </mat-panel-title>
+                    <!-- <mat-panel-description>
+                            Click to {{panelOpenState1 ? 'close User Table' : 'View User Table}}
+                        </mat-panel-description> -->
+                </mat-expansion-panel-header>
+                <div style="margin-left: 15px;margin-bottom: 5px;">
+                    <button type="button" mat-raised-button matTooltip="Filter Admins" (click)="getAdmins()">Admins</button>&nbsp;
+                    <button type="button" mat-raised-button matTooltip="Filter Users" (click)="getUsers()">Users</button>
+                </div>
+                <div>
+                    <div class="container text-center">
+                        <table mat-table [dataSource]="dataSource_01" class=" example-container mat-elevation-z8">
+                            <!-- Column numbers -->
+                            <ng-container matColumnDef="S.no">
+                                <th mat-header-cell *matHeaderCellDef> S.no </th>
+                                <td mat-cell *matCellDef="let element;index as i"> {{i+1}} </td>
+                            </ng-container>
+                            <!--User id Column -->
+                            <ng-container matColumnDef="id">
+                                <th mat-header-cell *matHeaderCellDef> ID </th>
+                                <td mat-cell *matCellDef="let element"> {{element._id}} </td>
+                            </ng-container>
+
+                            <!--User Name Column -->
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef> Name </th>
+                                <td mat-cell *matCellDef="let element"> {{element.fullname}} </td>
+                            </ng-container>
+
+                            <!-- User Email Column -->
+                            <ng-container matColumnDef="email">
+                                <th mat-header-cell *matHeaderCellDef> Email </th>
+                                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                            </ng-container>
+
+                            <!-- Quantity Column -->
+                            <ng-container matColumnDef="role">
+                                <th mat-header-cell *matHeaderCellDef>Role </th>
+                                <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+                            </ng-container>
+                            <!-- Actions Column with buttons -->
+                            <ng-container matColumnDef="actions">
+                                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button class="btn btn-danger" mat-raised-button matTooltip="Delete User" (click)="deleteUser(element._id)">
+                                    Delete</button>
+                                </td>
+                            </ng-container>
+
+                            <!-- used sticky:true to make the header sticky -->
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns_01; sticky: true"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns_01;"></tr>
+                        </table>
+                        <!-- paginator -->
+                        <mat-paginator [pageSizeOptions]="[2,4,6,8,10]" showFirstLastButtons aria-label="Select page of products">
+                        </mat-paginator>
+                    </div>
+                </div>
+
+
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>
+<!-- Add admin popup with form -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New Admin</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- admin reg form -->
+                <form [formGroup]="adminForm" class="normal-form">
+                    <div class="controles-container">
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="fullname" placeholder="Full Name">
+                            <mat-error>This filed is mandatory</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput type="email" formControlName="email" placeholder="Email">
+                            <mat-error>Invalid email address</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput type="password" formControlName="password" placeholder="Password">
+                            <mat-error>Invalid password</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="role" placeholder="role" [(ngModel)]="userrole" value="admin">
+                            <mat-error>This filed is mandatory</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" mat-raised-button class="btn btn-danger" data-dismiss="modal" #closemodal1 id="closebtn1">X Close</button>&nbsp;
+                        <button type="submit" mat-raised-button class="btn btn-success" [disabled]="adminForm.invalid" (click)="validateadmin()">=> Add Admin</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- add product popup model with form -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Products</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- add product form -->
+                <form [formGroup]="productForm" class="normal-form">
+                    <div class="controles-container">
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="name" placeholder="Product Name">
+                            <mat-error>This filed is mandatory</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput type="number" formControlName="price" placeholder="Product Price">
+                            <mat-error>This filed is mandatory</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput type="number" formControlName="quantity" placeholder="Product Quantity">
+                            <mat-error>This filed is mandatory</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput type="url" formControlName="imgUrl" placeholder="Product imgUrl">
+                            <mat-error>This filed is mandatory</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" mat-raised-button class="btn btn-danger" data-dismiss="modal" #closemodal1 id="closebtn2">X Close</button>&nbsp;
+                        <button type="submit" mat-raised-button class="btn btn-success" [disabled]="productForm.invalid" (click)="validateproduct()" *ngIf="isAdd_btnVisible">=> Add Product</button>
+
+                        <button type="submit" mat-raised-button class="btn btn-warning" (click)="editproduct()" *ngIf="isEdit_btnVisible">=> Update Product</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

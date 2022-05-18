@@ -1,0 +1,74 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head> -->
+<!-- <mat-spinner style="margin-top:250px;margin-left: 500px;" *ngIf="isloading"></mat-spinner>
+
+<body *ngIf="!isloading">
+    <div class="container">
+        <div class="cover">
+            <div class="front">
+                <img src="https://wenxichu.com/wp-content/uploads/2020/03/Online-Store-768x506.jpg" alt="" width="100px" height="50px">
+            </div>
+        </div>
+        <div class="forms">
+            <div class="form-content">
+                <div class="signup-form">
+                    <div class="title">Registration</div>
+
+                    <form [formGroup]="regForm" (ngSubmit)="Reg()">
+
+                        <div class="input-boxes">
+                            <div class="input-box">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" placeholder="Enter your email" name="email" formControlName="email">
+                                <div *ngIf="email?.invalid && email?.touched" style="color: red;">*Enter valid email Id</div>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" placeholder="Enter your password" name="password" formControlName="password">
+                                <div *ngIf="password?.invalid && password?.touched" style="color: red;">*Enter valid Password</div>
+
+                            </div>
+                            <div class="button input-box">
+                                <input [disabled]="regForm.invalid" type="Submit">
+                            </div>
+                            <div class="text sign-up-text">Already have an account? <a routerLink="/auth/login">Login</a></div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body> -->
+<!-- </html> -->
+
+<img class="picture  " src="https://cdn.pixabay.com/photo/2019/03/05/02/02/grocery-shopping-4035413__340.png" height="800px" width="1000px">
+ <div class="position text-center card shadow p-2 ">
+ <h3>Registeration</h3>
+ <div class="container">
+ <div class="">
+  <form  [formGroup]="regForm" (ngSubmit)="Reg()">
+     <div class="form-group">
+         <label for="exampleInputEmail1">Email address</label>&nbsp;&nbsp;
+         <input type="email" name="email"  aria-describedby="emailHelp"name="email" formControlName="email" >
+         <span *ngIf="email?.invalid && email?.touched" style="color: red;">*Enter valid email Id</span>
+       </div>
+       <div class="form-group">
+         <label for="exampleInputPassword1">Password</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <input type="password" name="password" aria-describedby="passHelp" formControlName="password" name="password" formControlName="password" >
+         <span *ngIf="password?.invalid && password?.touched" style="color: red;">*Enter valid Password</span>
+       </div>
+       
+     <button [disabled]="regForm.invalid" type="Submit" class="btn btn-primary">Resgister</button><br>
+   </form>
+   <div class="form-group mt-2 ml-5">
+    <div class="text sign-up-text">Already have an account? <a routerLink="/auth/login">login</a></div>
+   </div>
+   </div>
+ </div>
